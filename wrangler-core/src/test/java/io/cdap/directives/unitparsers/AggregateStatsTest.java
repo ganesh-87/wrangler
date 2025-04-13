@@ -14,7 +14,7 @@
  * the License.
  */
 
- package io.cdap.directives;
+ package io.cdap.directives.unitparsers;
 
  import io.cdap.wrangler.TestingRig;
  import io.cdap.wrangler.api.Row;

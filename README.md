@@ -216,3 +216,55 @@ Cask is a trademark of Cask Data, Inc. All rights reserved.
 
 Apache, Apache HBase, and HBase are trademarks of The Apache Software Foundation. Used with
 permission. No endorsement by The Apache Software Foundation is implied by the use of these marks.
+
+
+
+🆕 Enhancements: Byte Size and Time Duration Support
+This enhancement adds native support for parsing byte sizes and time durations in Wrangler recipes, along with a new aggregate directive for computing statistics on those values.
+
+✅ New Token Types Added
+Token Type	Example Inputs	Canonical Unit	Description
+BYTE_SIZE	10KB, 2.5MB, 1GB	Bytes	Converts string sizes to long byte values
+TIME_DURATION	150ms, 2s, 1min	Milliseconds	Converts time durations to long milliseconds
+These tokens are now valid in recipe arguments and handled like standard types.
+
+🧠 Grammar Changes (Directives.g4)
+Added new lexer tokens: BYTE_SIZE, TIME_DURATION
+
+Created helper fragments: BYTE_UNIT, TIME_UNIT
+
+Extended the value rule to support the new types
+
+
+🧱 New Token Classes
+Class Name	     Package	Description
+ByteSize	       io.cdap.wrangler.api.parser	Parses size strings and converts to bytes
+TimeDuration	   io.cdap.wrangler.api.parser	Parses time strings and converts to milliseconds
+
+These implement the Token interface and are returned by the parser for matched input.
+
+🧩 Core Parser Updates
+Modified visitValue() in RecipeCompiler.java to return:
+
+new ByteSize(ctx.getText()) for BYTE_SIZE
+
+new TimeDuration(ctx.getText()) for TIME_DURATION
+
+Integrated these into the TokenGroup passed to directives
+
+🚀 New Directive: aggregate-stats
+This directive aggregates byte and time values across rows and outputs totals or averages.
+
+Usage:
+
+aggregate-stats :data_size :response_time total_size_mb total_time_sec
+
+Features:
+
+Accepts columns with byte size and time duration values
+
+Computes and outputs total (or average) in desired units
+
+Supports MB, GB, seconds, minutes (optional enhancement)
+
+

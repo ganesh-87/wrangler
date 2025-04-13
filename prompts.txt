@@ -1,0 +1,57 @@
+# 
+# Copyright © 2024 Ganesh
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# AI Prompts Used for Wrangler Enhancement Assignment
+
+1. Prompt:
+"Explain the Software Engineer Intern Assignment clearly and step by step."
+
+→ Used to understand the goals, tasks, and deliverables of the assignment.
+
+---
+
+
+2. Prompt:
+"How to modify Directives.g4 to support BYTE_SIZE and TIME_DURATION units?"
+
+→ Used to write lexer and parser grammar for the new units.
+
+---
+
+3. Prompt:
+"Where and how should I update the Wrangler parser to recognize BYTE_SIZE and TIME_DURATION tokens?"
+
+→ Helped locate `RecipeVisitor.java` and guided implementation of `visitValue()`.
+
+---
+
+4. Prompt:
+"How to resolve the errors caused by checkstyle execution by feeding previous reference classes"
+
+→ Helped in resolving errors ex:- nextline at the of the file
+
+5. Prompt:
+"Summarize all the changes made for this enhancement for the README file."
+
+→ Used to generate documentation that describes grammar changes, new classes, and new directive.
+
+---
+
+6. Prompt:
+"Create a prompts.txt file summarizing all AI prompts used during this assignment."
+
+→ This prompt itself!
+
