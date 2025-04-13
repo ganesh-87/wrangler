@@ -70,6 +70,10 @@ public enum TokenType implements Serializable {
    */
   NUMERIC,
 
+  BYTE_SIZE,
+
+  TIME_DURATION,
+  
   /**
    * Represents the enumerated type for the object of {@code Bool} type.
    * This type is associated with the token that either represents string 'true' or 'false'.

@@ -22,6 +22,7 @@ import io.cdap.wrangler.api.SourceInfo;
 import io.cdap.wrangler.api.Triplet;
 import io.cdap.wrangler.api.parser.Bool;
 import io.cdap.wrangler.api.parser.BoolList;
+import io.cdap.wrangler.api.parser.ByteSize;
 import io.cdap.wrangler.api.parser.ColumnName;
 import io.cdap.wrangler.api.parser.ColumnNameList;
 import io.cdap.wrangler.api.parser.DirectiveName;
@@ -33,6 +34,7 @@ import io.cdap.wrangler.api.parser.Properties;
 import io.cdap.wrangler.api.parser.Ranges;
 import io.cdap.wrangler.api.parser.Text;
 import io.cdap.wrangler.api.parser.TextList;
+import io.cdap.wrangler.api.parser.TimeDuration;
 import io.cdap.wrangler.api.parser.Token;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
@@ -122,6 +124,19 @@ public final class RecipeVisitor extends DirectivesBaseVisitor<RecipeSymbol.Buil
     return builder;
   }
 
+
+  @Override
+public RecipeSymbol.Builder visitValue(DirectivesParser.ValueContext ctx) {
+  String text = ctx.getText();
+
+  if (text.matches("(?i)^\\d+(\\.\\d+)?(kb|mb|gb|tb)$")) {
+    builder.addToken(new ByteSize(text));
+  } else if (text.matches("(?i)^\\d+(\\.\\d+)?(ms|s|min|h)$")) {
+    builder.addToken(new TimeDuration(text));
+  }
+
+  return builder;
+}
   /**
    * A Pragma is an instruction to the compiler to dynamically load the directives being specified
    * from the <code>DirectiveRegistry</code>. These do not affect the data flow.
